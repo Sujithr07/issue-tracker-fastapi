@@ -1,6 +1,6 @@
 import uuid
 from fastapi import APIRouter, HTTPException, status
-from app.schemas import IssueCreate, IssueUpdate, IssueOut
+from app.schemas import IssueCreate, IssueUpdate, IssueOut, IssueStatus
 from app.storage import load_data, save_data
 
 router = APIRouter(prefix="/api/v1/issues", tags=["Issues"])
@@ -39,7 +39,7 @@ def create_issue(payload: IssueCreate):
         "title": payload.title,
         "description": payload.description,
         "priority": payload.priority.value,
-        "status": "open",
+        "status": IssueStatus.open.value,
     }
 
     issues.append(issue)
